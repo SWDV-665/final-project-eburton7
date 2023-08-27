@@ -1,0 +1,29 @@
+<ion-header [translucent]="true">
+  <ion-toolbar>
+    <ion-title>Recipes</ion-title>
+  </ion-toolbar>
+</ion-header>
+
+<ion-content>
+  <ion-segment [(ngModel)]="selectedType">
+    <ion-segment-button value="all">All</ion-segment-button>
+    <ion-segment-button value="breakfast">Breakfast</ion-segment-button>
+    <ion-segment-button value="lunch">Lunch</ion-segment-button>
+    <ion-segment-button value="dinner">Dinner</ion-segment-button>
+  </ion-segment>
+  
+  <ion-button expand="full" (click)="generateRecipe()">Generate</ion-button>
+  
+  <ion-card *ngIf="generatedRecipe">
+    <ion-card-header>
+      {{ generatedRecipe.name }}
+    </ion-card-header>
+    <ion-card-content>
+      <p><strong>Instructions:</strong></p>
+      <ul>
+        <li *ngFor="let step of generatedRecipe.instructions.split('\n')">{{ step }}</li>
+      </ul>
+      <p><strong>Cooking Time:</strong> {{ formatCookingTime(generatedRecipe.cookingTimeInMinutes) }}</p>
+    </ion-card-content>
+  </ion-card>
+</ion-content>
